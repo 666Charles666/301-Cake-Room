@@ -1,8 +1,18 @@
 package model;
 
+import java.util.Objects;
+
 public class Ingredient {
-    private String name;
-    private String textualDes;
+    private String name,textualDes;
+    private String flour,eggs,milk,chocolate,sugar,alcoholicSpirits,fruits,nuts;
+    private double calorie;
+
+
+    public Ingredient(String name,String textualDes,double calorie){
+        this.name = name;
+        this.textualDes = textualDes;
+        this.calorie = calorie;
+    }
 
     public String getName() {
         return name;
@@ -20,13 +30,77 @@ public class Ingredient {
         this.textualDes = textualDes;
     }
 
-    public String getCalories() {
-        return calories;
+
+    public String getFlour() {
+        return flour;
     }
 
-    public void setCalories(String calories) {
-        this.calories = calories;
+    public void setFlour(String flour) {
+        this.flour = flour;
     }
 
-    private String calories;
+    public String getEggs() {
+        return eggs;
+    }
+
+    public void setEggs(String eggs) {
+        this.eggs = eggs;
+    }
+
+    public String getMilk() {
+        return milk;
+    }
+
+    public void setMilk(String milk) {
+        this.milk = milk;
+    }
+
+    public String getChocolate() {
+        return chocolate;
+    }
+
+    public void setChocolate(String chocolate) {
+        this.chocolate = chocolate;
+    }
+
+    public String getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(String sugar) {
+        this.sugar = sugar;
+    }
+
+    public String getAlcoholicSpirits() {
+        return alcoholicSpirits;
+    }
+
+    public void setAlcoholicSpirits(String alcoholicSpirits) {
+        this.alcoholicSpirits = alcoholicSpirits;
+    }
+
+    public String getFruits() {
+        return fruits;
+    }
+
+    public void setFruits(String fruits) {
+        this.fruits = fruits;
+    }
+
+    public String getNuts() {
+        return nuts;
+    }
+
+    public void setNuts(String nuts) {
+        this.nuts = nuts;
+    }
+
+
+    public double getCalorie() {
+        return calorie;
+    }
+
+    public void setCalorie(double calorie) {
+        this.calorie = calorie;
+    }
 }
