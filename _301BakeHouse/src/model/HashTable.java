@@ -63,6 +63,13 @@ public class HashTable<T> {
         System.out.println("delete fault");
         return false; // Item not found
     }
+    public T get(int index) {
+        if (index >= 0 && index < hashTable.length) {
+            return (T) hashTable[index];
+        }
+        return null;
+    }
+
 
 //    public static void main(String[] args) {
 //        HashTable<Integer> h = new HashTable<>(10); // Example with Integer type
