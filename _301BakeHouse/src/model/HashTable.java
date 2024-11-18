@@ -21,39 +21,66 @@ public class HashTable<T> {
     }
 
     public int hashFunction(T key) {
-        return key.hashCode() % hashTable.length;
+        return Math.abs(key.hashCode()) % hashTable.length; // 确保返回非负值
+    }
+
+    // 辅助哈希函数
+    public int hashFunction2(T key) {
+        return 1 + (Math.abs(key.hashCode()) % (hashTable.length - 1)); // 确保步长非零
     }
 
     public int add(T item) {
         int home = hashFunction(item);
         int i = home;
+        int stepLong = hashFunction2(item);
 
         do {
             if (hashTable[i] == null) {
                 hashTable[i] = item;
-                System.out.println("add successful");
+                System.out.println("add successfully!");
                 return i;
             } else {
-                i = (i + 1) % hashTable.length;
-                System.out.println("Collision. Probing location " + i + "...");
+                i = (i + stepLong) % hashTable.length;
+                System.out.println("have a crash,Probing location " + i + "...");
             }
         } while (i != home);
-
+        System.out.println("add default");
         return -1;
     }
     public boolean delete(T item) {
         int home = hashFunction(item);
         int i = home;
+        int stepLong = hashFunction2(item);
 
         do {
             if (hashTable[i] != null && hashTable[i].equals(item)) {
                 hashTable[i] = null;
-                System.out.println("delete successfully");
+                System.out.println("delete successfully!");
                 return true;
             }
-            i = (i + 1) % hashTable.length;
+            i = (i + stepLong) % hashTable.length;
         } while (i != home && hashTable[i] != null);
         System.out.println("delete fault");
         return false; // Item not found
     }
+
+//    public static void main(String[] args) {
+//        HashTable<Integer> h = new HashTable<>(10); // Example with Integer type
+//        int data;
+//
+//        do {
+//            System.out.print("Enter value: ");
+//            data = new java.util.Scanner(System.in).nextInt();
+//            if (data != 0) {
+//                int loc = h.add(data);
+//                if (loc != -1) {
+//                    System.out.println("Item " + data + " stored at location " + loc);
+//                } else {
+//                    System.out.println("Error. Cannot store " + data + ". Table is full.");
+//                }
+//            }
+//        } while (data != 0);
+//
+//        h.displayHashTable();
+//    }
 }
