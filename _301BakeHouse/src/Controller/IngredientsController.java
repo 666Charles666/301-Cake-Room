@@ -3,8 +3,6 @@ package Controller;
 import model.HashTable;
 import model.Ingredient;
 
-import java.util.List;
-
 public class IngredientsController {
 
     int size;
@@ -14,31 +12,41 @@ public class IngredientsController {
         this.ingredientHashTable = new HashTable<>(size);
     }
 
-    public boolean addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient){
         if (ingredient == null){
-            return false;
+            return;
         }
         ingredientHashTable.add(ingredient);
-        System.out.println("add successfully");
-        return true;
     }
 
-    public String displayIngredient() {
+    public void displayIngredient() {
+        System.out.println("all of ingredients in there");
     ingredientHashTable.displayHashTable();
-    return "all of ingredient in there";
     }
 
     public void deleteIngredient(Ingredient ingredient){
         ingredientHashTable.delete(ingredient);
     }
-
-    // public static void main(String[] args) {
-    //     IngredientsController ingredientsController = new IngredientsController(10);
-    //     Ingredient i= new Ingredient("egg","heihei",100);
-    //     ingredientsController.addIngredient(i);
-    //     ingredientsController.displayIngredient();
-    //     ingredientsController.deleteIngredient(i);
-    //     ingredientsController.displayIngredient();
-
-    // }
+    public String search(String ingredientName){
+        for (int i = 0 ;i < size;i++){
+            Ingredient item = ingredientHashTable.get(i);
+            //should add a condition that determines whether the value is empty
+            if (item != null && item.getName().equals(ingredientName)) {
+                System.out.println("search successfully");
+                System.out.println(item.toString());
+                return item.toString();
+            }
+        }
+        return "search default";
     }
+
+    public static void main(String[] args) {
+        IngredientsController ingredientsController = new IngredientsController(10);
+        Ingredient i= new Ingredient("egg","heihei",100);
+        ingredientsController.addIngredient(i);
+        ingredientsController.displayIngredient();
+        ingredientsController.addIngredient(new Ingredient("oil","nianhuhu",500));
+        ingredientsController.displayIngredient();
+        ingredientsController.search("egg");
+    }
+}
