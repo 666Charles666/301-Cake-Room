@@ -14,7 +14,7 @@ public class Ingredient {
         this.calorie = calorie;
     }
     public String toString() {
-        return "Ingredient{name: " + name + ", textualDes:" + textualDes + "calorie: "+ calorie + "g}";
+        return "Ingredient{name: " + name + ", textualDes:" + textualDes + ", calorie: "+ calorie + "g}";
     }
     public String getName() {
         return name;
