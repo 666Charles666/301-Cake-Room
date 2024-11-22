@@ -5,7 +5,7 @@ import model.Ingredient;
 
 public class IngredientsController {
 
-    int size;
+    int size ;
     HashTable<Ingredient> ingredientHashTable;
     public IngredientsController(int size){
         this.size = size;
@@ -21,7 +21,7 @@ public class IngredientsController {
 
     public void displayIngredient() {
         System.out.println("all of ingredients in there");
-    ingredientHashTable.displayHashTable();
+        ingredientHashTable.displayHashTable();
     }
 
     public void deleteIngredient(Ingredient ingredient){
@@ -30,7 +30,7 @@ public class IngredientsController {
     public String search(String ingredientName){
         for (int i = 0 ;i < size;i++){
             Ingredient item = ingredientHashTable.get(i);
-            //should add a condition that determines whether the value is empty
+
             if (item != null && item.getName().equals(ingredientName)) {
                 System.out.println("search successfully");
                 System.out.println(item.toString());
@@ -40,13 +40,13 @@ public class IngredientsController {
         return "search default";
     }
 
-    public static void main(String[] args) {
-        IngredientsController ingredientsController = new IngredientsController(10);
-        Ingredient i= new Ingredient("egg","heihei",100);
-        ingredientsController.addIngredient(i);
-        ingredientsController.displayIngredient();
-        ingredientsController.addIngredient(new Ingredient("oil","nianhuhu",500));
-        ingredientsController.displayIngredient();
-        ingredientsController.search("egg");
-    }
+//    public static void main(String[] args) {
+//        IngredientsController ingredientsController = new IngredientsController(50);
+//        Ingredient i= new Ingredient("egg","heihei",100);
+//        ingredientsController.addIngredient(i);
+//        ingredientsController.displayIngredient();
+//        ingredientsController.addIngredient(new Ingredient("oil","nianhuhu",500));
+//        ingredientsController.displayIngredient();
+//        ingredientsController.search("egg");
+//    }
 }

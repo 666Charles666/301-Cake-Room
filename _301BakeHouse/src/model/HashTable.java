@@ -21,12 +21,12 @@ public class HashTable<T> {
     }
 
     public int hashFunction(T key) {
-        return Math.abs(key.hashCode()) % hashTable.length; // 确保返回非负值
+        return Math.abs(key.hashCode()) % hashTable.length;
     }
 
     // 辅助哈希函数
     public int hashFunction2(T key) {
-        return 1 + (Math.abs(key.hashCode()) % (hashTable.length - 1)); // 确保步长非零
+        return 1 + (Math.abs(key.hashCode()) % (hashTable.length - 1));
     }
 
     public int add(T item) {

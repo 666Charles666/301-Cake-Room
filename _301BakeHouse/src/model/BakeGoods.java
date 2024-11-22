@@ -2,7 +2,7 @@ package model;
 
 public class BakeGoods {
     private String name,originCountry,textualDES,imgURL,
-                   cakes,breads,biscuits,tarts,pies;
+            cakes,breads,biscuits,tarts,pies;
     private double BakeGoodsCalories;
     public BakeGoods(String name,String originCountry,String textualDES,String imgURL){
         this.name = name;
