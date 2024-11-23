@@ -88,13 +88,13 @@ public class IngredientsController {
         }
     }
 
-    public static void main(String[] args) {
-        IngredientsController ingredientsController = new IngredientsController(50);
-        ingredientsController.addIngredient("香菜","好吃",12.6);
-        System.out.println(ingredientsController.displayIngredient());
-        ingredientsController.search("香菜");
-        ingredientsController.update("香菜");
-        System.out.println(ingredientsController.displayIngredient());
-    }
+    // public static void main(String[] args) {
+    //     IngredientsController ingredientsController = new IngredientsController(50);
+    //     ingredientsController.addIngredient("香菜","好吃",12.6);
+    //     System.out.println(ingredientsController.displayIngredient());
+    //     ingredientsController.search("香菜");
+    //     ingredientsController.update("香菜");
+    //     System.out.println(ingredientsController.displayIngredient());
+    // }
 
 }
