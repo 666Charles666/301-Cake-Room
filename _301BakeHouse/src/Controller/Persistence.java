@@ -6,14 +6,14 @@ import java.io.*;
 
 public class Persistence {
 
-    private static final String FILE_NAME = "system_data.ser"; // 存储数据的文件
+    private static final String FILE_NAME = "system_data.ser";
 
     // 保存系统状态到文件
     public static void saveSystemState(RecipesController recipesController, BakeGoodsController bakeGoodsController,IngredientsController ingredientsController) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            // 保存 RecipesHash 表（食谱哈希表）
+            
             out.writeObject(recipesController.recipesHashTable);
-            // 保存 BakeGoodsController 的状态（即 BakeGoods 数据）
+           
             out.writeObject(bakeGoodsController.BakeGoodsTable);
             out.writeObject(ingredientsController.ingredientHashTable);
             System.out.println("系统数据已保存");
@@ -25,14 +25,14 @@ public class Persistence {
     // 从文件加载系统状态
     public static void loadSystemState(RecipesController recipesController, BakeGoodsController bakeGoodsController,IngredientsController ingredientsController) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            // 加载 RecipesHash 表
+            
             RecipesHash loadedRecipesHash = (RecipesHash) in.readObject();
-            // 加载 BakeGoodsController 的数据
+            
             HashTable loadedBakeGoodsTable = (HashTable) in.readObject();
             HashTable loadedIngredientTable = (HashTable) in.readObject();
-            // 将加载的状态赋值给传入的对象
-            recipesController.setRecipesHashTable(loadedRecipesHash); // 假设你有一个 setRecipesHash 方法来更新 hash 表
-            bakeGoodsController.setBakeGoodsTable(loadedBakeGoodsTable); // 同样，假设你有类似的 setter
+          
+            recipesController.setRecipesHashTable(loadedRecipesHash); 
+            bakeGoodsController.setBakeGoodsTable(loadedBakeGoodsTable); 
             ingredientsController.setIngredientHashTable(loadedIngredientTable);
 
             System.out.println("系统数据已加载");
@@ -46,8 +46,8 @@ public class Persistence {
 //        RecipesController recipesController = new RecipesController(50);
 //        BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
 //        IngredientsController ingredientsController = new IngredientsController(20);
-//        
-//        recipesController.add();  
+//
+//        recipesController.add();
 //        bakeGoodsController.addGoods(new BakeGoods("Cake"));
 //        ingredientsController.addIngredient("Flour", "A type of flour", 100.0);
 //
