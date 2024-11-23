@@ -54,14 +54,41 @@ public class RecipesController {
            return "Search result for 'burger': " + recipesHashTable.get(bakeGood);
        } return "No recipe found for 'burger'.";
     }
-    public void update(String bakeGood){
+    public boolean update(String bakeGood) {
+        Scanner scanner = new Scanner(System.in);
 
+        String existingRecipe = recipesHashTable.get(bakeGood);
+        if (existingRecipe == null) {
+            System.out.println("Can't find the recipe of this name");
+            return false;
+        }
+
+        System.out.println("Updating recipe for " + bakeGood);
+        String finalIngredient = "";
+        while (true) {
+            System.out.println("What ingredient do you want to add? (or input 'finish' to finish update)");
+            String ingredient = scanner.nextLine();
+            if (ingredient.equals("finish")) {
+                System.out.println("Ingredients updated successfully.");
+                break;
+            }
+            System.out.println("Please enter the quantity (e.g. 10ml/10g):");
+            String quantity = scanner.nextLine();
+            finalIngredient += ingredient + " " + quantity + " ";
+        }
+        
+        recipesHashTable.delete(bakeGood);
+        recipesHashTable.add(bakeGood, finalIngredient);
+        return true;
     }
+
 
     public static void main(String[] args) {
         RecipesController recipesController = new RecipesController(50);
         recipesController.add();
         System.out.println(recipesController.display());
         System.out.println(recipesController.search("burger"));
+        recipesController.update("burger");
+        System.out.println(recipesController.display());
     }
 }
