@@ -1,16 +1,13 @@
 package Controller;
 
-import model.HashTable;
-import model.Ingredient;
-import model.Recipes;
-import model.RecipesHash;
+import model.*;
 
 import java.util.Scanner;
 
 public class RecipesController {
     int size;
     RecipesHash recipesHashTable;
-    BakeGoodsController bakeGoodsController;
+    BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
     public RecipesController(int size){
         this.size = size;
         this.recipesHashTable = new RecipesHash(size);
@@ -19,7 +16,17 @@ public class RecipesController {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What good's recipes do you want to add?");
         String bakeGood = scanner.nextLine();
-        Recipes recipes = new Recipes(bakeGood);
+        for (int i = 0;i<bakeGoodsController.size;i++){
+            BakeGoods item = bakeGoodsController.BakeGoodsTable.get(i);
+            if (item != null && item.getName().equals(bakeGood)){
+                System.out.println("have found this bake good");
+            }else {
+                bakeGoodsController.addGoods(new BakeGoods(bakeGood));
+                System.out.println("have add a new bake good in class BakeGoods");
+            }
+            break;
+        }
+//        Recipes recipes = new Recipes(bakeGood);
         String finalIngredient = "";
         while (true){
             System.out.println("What ingredient do you want to add?(or input finish to finish add)");
@@ -35,24 +42,26 @@ public class RecipesController {
         recipesHashTable.add(bakeGood,finalIngredient);
         return "add successfully!";
     }
-    public void display(){
-        recipesHashTable.display();
+    public String display(){
+        return recipesHashTable.display();
     }
-    public void delete(String bakeGood){
+    public String delete(String bakeGood){
         recipesHashTable.delete(bakeGood);
-        System.out.println("delete successfully");
+        return ("delete successfully");
     }
     public String search(String bakeGood){
        if ( bakeGood != null ){
            return "Search result for 'burger': " + recipesHashTable.get(bakeGood);
        } return "No recipe found for 'burger'.";
     }
+    public void update(String bakeGood){
+
+    }
 
     public static void main(String[] args) {
         RecipesController recipesController = new RecipesController(50);
         recipesController.add();
-        recipesController.display();
+        System.out.println(recipesController.display());
         System.out.println(recipesController.search("burger"));
-
     }
 }
