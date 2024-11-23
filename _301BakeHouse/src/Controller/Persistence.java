@@ -40,33 +40,32 @@ public class Persistence {
             System.err.println("加载系统数据时出错：" + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        // 创建测试数据
-        RecipesController recipesController = new RecipesController(50);
-        BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
-        IngredientsController ingredientsController = new IngredientsController(20);
-
-        // 添加一些数据（这部分可以根据你实际的数据结构来添加）
-        recipesController.add();  // 假设你已经在RecipesController类中定义了add方法
-        bakeGoodsController.addGoods(new BakeGoods("Cake"));
-        ingredientsController.addIngredient("Flour", "A type of flour", 100.0);
-
-        // 保存系统状态
-        saveSystemState(recipesController, bakeGoodsController, ingredientsController);
-
-        // 创建新对象来测试加载功能
-        RecipesController newRecipesController = new RecipesController(50);
-        BakeGoodsController newBakeGoodsController = new BakeGoodsController(10);
-        IngredientsController newIngredientsController = new IngredientsController(20);
-
-        // 加载系统状态
-        loadSystemState(newRecipesController, newBakeGoodsController, newIngredientsController);
-
-        // 验证数据是否加载成功
-        System.out.println(newRecipesController.display());  // 打印加载后的数据
-        newBakeGoodsController.displayGoods();  // 打印加载后的 BakeGoods 数据
-        System.out.println(newIngredientsController.displayIngredient());  // 打印加载后的 Ingredient 数据
-    }
+//
+//    public static void main(String[] args) {
+//        // 创建测试数据
+//        RecipesController recipesController = new RecipesController(50);
+//        BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
+//        IngredientsController ingredientsController = new IngredientsController(20);
+//        
+//        recipesController.add();  
+//        bakeGoodsController.addGoods(new BakeGoods("Cake"));
+//        ingredientsController.addIngredient("Flour", "A type of flour", 100.0);
+//
+//        // 保存系统状态
+//        saveSystemState(recipesController, bakeGoodsController, ingredientsController);
+//
+//        // 创建新对象来测试加载功能
+//        RecipesController newRecipesController = new RecipesController(50);
+//        BakeGoodsController newBakeGoodsController = new BakeGoodsController(10);
+//        IngredientsController newIngredientsController = new IngredientsController(20);
+//
+//        // 加载系统状态
+//        loadSystemState(newRecipesController, newBakeGoodsController, newIngredientsController);
+//
+//        // 验证数据是否加载成功
+//        System.out.println(newRecipesController.display());  // 打印加载后的数据
+//        newBakeGoodsController.displayGoods();  // 打印加载后的 BakeGoods 数据
+//        System.out.println(newIngredientsController.displayIngredient());  // 打印加载后的 Ingredient 数据
+//    }
 
 }
