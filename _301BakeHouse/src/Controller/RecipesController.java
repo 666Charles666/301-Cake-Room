@@ -83,12 +83,12 @@ public class RecipesController {
     }
 
 
-    public static void main(String[] args) {
-        RecipesController recipesController = new RecipesController(50);
-        recipesController.add();
-        System.out.println(recipesController.display());
-        System.out.println(recipesController.search("burger"));
-        recipesController.update("burger");
-        System.out.println(recipesController.display());
-    }
+    // public static void main(String[] args) {
+    //     RecipesController recipesController = new RecipesController(50);
+    //     recipesController.add();
+    //     System.out.println(recipesController.display());
+    //     System.out.println(recipesController.search("burger"));
+    //     recipesController.update("burger");
+    //     System.out.println(recipesController.display());
+    // }
 }
