@@ -1,6 +1,9 @@
 package model;
-public class RecipesHash {
-    private static class Object {
+
+import java.io.Serializable;
+
+public class RecipesHash implements Serializable {
+    private static class Object implements Serializable{
         String key;
         String value;
         boolean isDeleted;

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
     private String name,textualDes;
     private String flour,eggs,milk,chocolate,sugar,alcoholicSpirits,fruits,nuts;
     private double calorie;

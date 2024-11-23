@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HashTable<T> {
+public class HashTable<T> implements Serializable {
     private final Object[] hashTable;
 
     public HashTable(int size) {

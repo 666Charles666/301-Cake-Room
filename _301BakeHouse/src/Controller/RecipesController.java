@@ -2,10 +2,20 @@ package Controller;
 
 import model.*;
 
+import java.io.*;
 import java.util.Scanner;
 
-public class RecipesController {
+public class RecipesController implements Serializable {
     int size;
+
+    public RecipesHash getRecipesHashTable() {
+        return recipesHashTable;
+    }
+
+    public void setRecipesHashTable(RecipesHash recipesHashTable) {
+        this.recipesHashTable = recipesHashTable;
+    }
+
     RecipesHash recipesHashTable;
     BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
     public RecipesController(int size){
@@ -76,19 +86,21 @@ public class RecipesController {
             String quantity = scanner.nextLine();
             finalIngredient += ingredient + " " + quantity + " ";
         }
-        
+
         recipesHashTable.delete(bakeGood);
         recipesHashTable.add(bakeGood, finalIngredient);
         return true;
     }
 
 
-    // public static void main(String[] args) {
-    //     RecipesController recipesController = new RecipesController(50);
-    //     recipesController.add();
-    //     System.out.println(recipesController.display());
-    //     System.out.println(recipesController.search("burger"));
-    //     recipesController.update("burger");
-    //     System.out.println(recipesController.display());
-    // }
+    public static void main(String[] args) {
+        RecipesController recipesController = new RecipesController(50);
+        recipesController.add();
+        System.out.println(recipesController.display());
+        System.out.println(recipesController.search("burger"));
+        recipesController.update("burger");
+        System.out.println(recipesController.display());
+
+
+    }
 }

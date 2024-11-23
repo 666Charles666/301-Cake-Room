@@ -1,14 +1,14 @@
 package model;
 
-public class BakeGoods {
+import java.io.Serializable;
+
+public class BakeGoods implements Serializable {
     private String name,originCountry,textualDES,imgURL,
             cakes,breads,biscuits,tarts,pies;
     private double BakeGoodsCalories;
-    public BakeGoods(String name,String originCountry,String textualDES,String imgURL){
+    public BakeGoods(String name){
         this.name = name;
-        this.originCountry = originCountry;
-        this.textualDES = textualDES;
-        this.imgURL = imgURL;
+
     }
 
 

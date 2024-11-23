@@ -3,11 +3,21 @@ package Controller;
 import model.HashTable;
 import model.Ingredient;
 
+import java.io.*;
 import java.util.Scanner;
 
-public class IngredientsController {
+public class IngredientsController implements Serializable {
 
     int size ;
+
+    public HashTable<Ingredient> getIngredientHashTable() {
+        return ingredientHashTable;
+    }
+
+    public void setIngredientHashTable(HashTable<Ingredient> ingredientHashTable) {
+        this.ingredientHashTable = ingredientHashTable;
+    }
+
     HashTable<Ingredient> ingredientHashTable;
     Scanner scanner = new Scanner(System.in);
     public IngredientsController(int size){
@@ -88,13 +98,14 @@ public class IngredientsController {
         }
     }
 
-    // public static void main(String[] args) {
-    //     IngredientsController ingredientsController = new IngredientsController(50);
-    //     ingredientsController.addIngredient("香菜","好吃",12.6);
-    //     System.out.println(ingredientsController.displayIngredient());
-    //     ingredientsController.search("香菜");
-    //     ingredientsController.update("香菜");
-    //     System.out.println(ingredientsController.displayIngredient());
-    // }
+
+    public static void main(String[] args) {
+        IngredientsController ingredientsController = new IngredientsController(50);
+        ingredientsController.addIngredient("香菜","好吃",12.6);
+        System.out.println(ingredientsController.displayIngredient());
+        ingredientsController.search("香菜");
+        ingredientsController.update("香菜");
+        System.out.println(ingredientsController.displayIngredient());
+    }
 
 }

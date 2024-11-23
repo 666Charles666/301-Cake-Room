@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Recipes {
+public class Recipes implements Serializable {
     String bakeGoods;
 
     public Recipes(String bakeGoods){
