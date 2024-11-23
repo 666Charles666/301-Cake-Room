@@ -80,13 +80,16 @@ public class RecipesHash {
         }
     }
 
-    public void display() {
+    public String display() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < size; i++) {
             if (table[i] != null && !table[i].isDeleted) {
-                System.out.println("Index " + i + ": " + table[i].key + " -> " + table[i].value);
+                stringBuilder.append("Index " + i + ": " + table[i].key + " -> " + table[i].value + "\n");
             } else {
-                System.out.println("Index " + i + ": null");
+                stringBuilder.append("Index " + i + ": null\n");
             }
         }
+        return stringBuilder.toString();
     }
+
 }
