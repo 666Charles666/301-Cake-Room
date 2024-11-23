@@ -15,7 +15,7 @@ public class HashTable<T> {
             if (hashTable[i] == null){
                 System.out.println(i + ":" + hashTable[i]);
             }else {
-                System.out.println(i + ":" + hashTable[i].toString());
+                System.out.println (i + ":" + hashTable[i].toString());
             }
         }
     }
