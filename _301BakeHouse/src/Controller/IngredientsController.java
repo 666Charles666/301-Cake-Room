@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class IngredientsController implements Serializable {
 
-    int size ;
+    public int size ;
 
     public HashTable<Ingredient> getIngredientHashTable() {
         return ingredientHashTable;
@@ -18,7 +18,7 @@ public class IngredientsController implements Serializable {
         this.ingredientHashTable = ingredientHashTable;
     }
 
-    HashTable<Ingredient> ingredientHashTable;
+    public HashTable<Ingredient> ingredientHashTable;
     Scanner scanner = new Scanner(System.in);
     public IngredientsController(int size){
         this.size = size;
@@ -51,10 +51,10 @@ public class IngredientsController implements Serializable {
 
 
 
-    public boolean deleteIngredient(String ingredient){
+    public boolean deleteIngredient(Ingredient ingredient){
         for (int i = 0; i < size ;i++){
             Ingredient currentIngredient = ingredientHashTable.get(i);
-            if (currentIngredient != null && currentIngredient.getName().equals(ingredient)){
+            if (currentIngredient != null && currentIngredient.getName().equals(ingredient.getName())){
                 ingredientHashTable.delete(ingredientHashTable.get(i));
 //                System.out.println("delete successfully");
                 return true;
@@ -64,38 +64,32 @@ public class IngredientsController implements Serializable {
         System.out.println("can't find the ingredient of this name");
         return false;
     }
-    public String search(String ingredientName){
+    public Ingredient search(String ingredientName){
         for (int i = 0 ;i < size;i++){
             Ingredient item = ingredientHashTable.get(i);
 
             if (item != null && item.getName().equals(ingredientName)) {
                 System.out.println("search successfully");
                 System.out.println(item.toString());
-                return item.toString();
+                return item;
             }
         }
-        return "search default";
+        return null;
     }
 
-    public boolean update(String name){
-//        deleteIngredient(name);
-        if (!deleteIngredient(name)){
-            System.out.println("update fault, can't find this ingredient");
-            return false;
+    public boolean update(Ingredient ingredient){
+        Ingredient item = search(ingredient.getName());
+        if (item != null){
+            for (int i = 0; i < size; i++) {
+                Ingredient temp = ingredientHashTable.get(i);
+                if (item.toString().equals(temp.toString())){
+                     ingredientHashTable.get(i).setTextualDes(ingredient.getTextualDes());
+                     ingredientHashTable.get(i).setCalorie(ingredient.getCalorie());
+                     return true;
+                }
+            }
         }
-        System.out.println("please input the new ingredient's textualDes");
-        String textualDes = scanner.nextLine();
-        System.out.println("please input How many calorie it have");
-        double calorie = scanner.nextDouble();
-        scanner.nextLine();
-        boolean added = addIngredient(name,textualDes,calorie);
-        if (added) {
-
-            return true;
-        }else{
-            System.out.println("Update failed,couldn't add updated ingredient.");
-            return false;
-        }
+        return false;
     }
 
 
@@ -104,7 +98,7 @@ public class IngredientsController implements Serializable {
         ingredientsController.addIngredient("香菜","好吃",12.6);
         System.out.println(ingredientsController.displayIngredient());
         ingredientsController.search("香菜");
-        ingredientsController.update("香菜");
+
         System.out.println(ingredientsController.displayIngredient());
     }
 
