@@ -4,7 +4,7 @@ import model.HashTable;
 import model.Ingredient;
 
 import java.io.*;
-import java.util.Scanner;
+
 
 public class IngredientsController implements Serializable {
     class Node {
@@ -27,7 +27,6 @@ public class IngredientsController implements Serializable {
     }
 
     public HashTable<Ingredient> ingredientHashTable;
-    Scanner scanner = new Scanner(System.in);
 
     public IngredientsController(int size) {
         this.size = size;
