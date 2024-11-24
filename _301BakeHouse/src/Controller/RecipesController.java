@@ -23,7 +23,7 @@ public class RecipesController implements Serializable {
         this.size = size;
         this.recipesHashTable = new RecipesHash(size);
     }
-    public String add(String bakeGood , String ingredient,String quantity){
+    public String add(String bakeGood , String ingredient){
 
         for (int i = 0;i<bakeGoodsController.size;i++){
             BakeGoods item = bakeGoodsController.BakeGoodsTable.get(i);
@@ -45,8 +45,8 @@ public class RecipesController implements Serializable {
 ////            System.out.println("please enter the quantity(e.g. 10ml/10g)");
 //
 //        }
-        finalIngredient += ingredient + " " + quantity + " ";
-        recipesHashTable.add(bakeGood,finalIngredient);
+        
+        recipesHashTable.add(bakeGood,ingredient);
         return "add successfully!";
     }
     public String display(){
@@ -105,7 +105,7 @@ public class RecipesController implements Serializable {
 
     public static void main(String[] args) {
         RecipesController recipesController = new RecipesController(50);
-        recipesController.add("burger","香菜","23g/l");
+        recipesController.add("burger","香菜 23g/l");
         System.out.println(recipesController.display());
 //        System.out.println(recipesController.searchByName("burger"));
 //        recipesController.update("burger");
