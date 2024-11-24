@@ -71,7 +71,10 @@ public class BakeGoodsController {
                 count++;
             }
         }
-        for (int i = 1; i < count; i++) {
+       return goods;
+    }
+    public BakeGoods[] Sortgoods(BakeGoods[]goods){
+        for (int i = 1; i < goods.length; i++) {
             BakeGoods key = goods[i];
             int j = i - 1;
             while (j >= 0 && goods[j].getName().compareTo(key.getName()) > 0) {
@@ -80,9 +83,9 @@ public class BakeGoodsController {
             }
             goods[j + 1] = key;
         }
-        BakeGoods[] sortedGoods = new BakeGoods[count];
-        System.arraycopy(goods, 0, sortedGoods, 0, count);
-        return sortedGoods;
+
+        return goods;
+
     }
     public String updateGoods(String Goodsname,BakeGoods newgoods){
         for (int i = 0 ;i < size;i++){
@@ -121,6 +124,5 @@ public class BakeGoodsController {
 //        case1.displayGoods();
     }
 }
-
 
 
