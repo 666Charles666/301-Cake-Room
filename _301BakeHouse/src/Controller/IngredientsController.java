@@ -70,6 +70,10 @@ public class IngredientsController implements Serializable {
         return true;
     }
 
+    /**
+     * a display method
+     * @return
+     */
     public String displayIngredient() {
         StringBuilder result = new StringBuilder("All ingredients in the hash table:\n");
         for (int i = 0; i < size; i++) { // Assuming getSize() provides the size of hashTable
@@ -84,6 +88,11 @@ public class IngredientsController implements Serializable {
     }
 
 
+    /**
+     * delete ingredient by this way
+     * @param ingredient
+     * @return
+     */
     public boolean deleteIngredient(Ingredient ingredient) {
         for (int i = 0; i < size; i++) {
             Ingredient currentIngredient = ingredientHashTable.get(i);
@@ -98,6 +107,11 @@ public class IngredientsController implements Serializable {
         return false;
     }
 
+    /**
+     * search by name
+     * @param ingredientName
+     * @return
+     */
     public Ingredient searchByName(String ingredientName) {
         for (int i = 0; i < size; i++) {
             Ingredient item = ingredientHashTable.get(i);
@@ -110,8 +124,11 @@ public class IngredientsController implements Serializable {
         return null;
     }
 
-
-
+    /**
+     * search by calorie
+     * @param calorie
+     * @return
+     */
     public Ingredient[] searchByCalorie(double calorie) {
         Node head = null;
         Node tail = null;
@@ -150,7 +167,11 @@ public class IngredientsController implements Serializable {
         return result;
     }
 
-    //Alphabetical sorting can be implemented if the user needs to click a button after searching by calorie
+    /**
+     * Alphabetical sorting can be implemented if the user needs to click a button after searching by calorie
+     * @param ingredients
+     * @return
+     */
     public Ingredient[] SortByLetter(Ingredient[] ingredients) {
         if (ingredients == null || ingredients.length == 0) {
             System.out.println("Have no ingredients to sort.");
@@ -163,7 +184,11 @@ public class IngredientsController implements Serializable {
         return ingredients;
     }
 
-
+    /**
+     * update in this way
+     * @param ingredient
+     * @return
+     */
     public boolean update(Ingredient ingredient) {
         Ingredient item = searchByName(ingredient.getName());
         if (item != null) {
@@ -179,6 +204,12 @@ public class IngredientsController implements Serializable {
         return false;
     }
 
+    /**
+     * ues quick sort to sort by letter
+     * @param ingredients
+     * @param left
+     * @param right
+     */
     private void quickSortByLetter(Ingredient[] ingredients, int left, int right) {
         if (left < right) {
             int pivotIndex = partition(ingredients, left, right);
@@ -186,7 +217,7 @@ public class IngredientsController implements Serializable {
             quickSortByLetter(ingredients, pivotIndex + 1, right);
         }
     }
-
+    
     private int partition(Ingredient[] ingredients, int left, int right) {
         Ingredient pivot = ingredients[right];
         int i = left - 1;
@@ -206,6 +237,13 @@ public class IngredientsController implements Serializable {
 
         return i + 1;
     }
+
+    /**
+     * a sample method to swap
+     * @param ingredients
+     * @param i
+     * @param j
+     */
     private void swap(Ingredient[] ingredients,int i, int j){
         Ingredient temp = ingredients[i];
         ingredients[i] = ingredients[j];
@@ -213,13 +251,13 @@ public class IngredientsController implements Serializable {
     }
 
 
-    public static void main(String[] args) {
-        IngredientsController ingredientsController = new IngredientsController(50);
-        ingredientsController.addIngredient("香菜","好吃",12.6);
-        System.out.println(ingredientsController.displayIngredient());
-        ingredientsController.searchByName("香菜");
-
-        System.out.println(ingredientsController.displayIngredient());
-    }
+//    public static void main(String[] args) {
+//        IngredientsController ingredientsController = new IngredientsController(50);
+//        ingredientsController.addIngredient("香菜","好吃",12.6);
+//        System.out.println(ingredientsController.displayIngredient());
+//        ingredientsController.searchByName("香菜");
+//
+//        System.out.println(ingredientsController.displayIngredient());
+//    }
 
 }
