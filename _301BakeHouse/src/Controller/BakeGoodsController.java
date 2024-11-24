@@ -1,34 +1,35 @@
 package Controller;
 import model.BakeGoods;
 import model.HashTable;
-import java.util.List;
 
 public class BakeGoodsController {
+
+
     HashTable<BakeGoods> BakeGoodsTable;
     int size;
 
-public BakeGoodsController(int size) {
-    this.size = size;
-    this.BakeGoodsTable = new HashTable<>(size);
+    public BakeGoodsController(int size) {
+        this.size = size;
+        this.BakeGoodsTable = new HashTable<>(size);
 
-}
-public boolean addGoods(BakeGoods bakeGoods){
-    if (bakeGoods == null){
-        System.out.println("Error!");
-        return false;
     }
-    BakeGoodsTable.add(bakeGoods);
-    System.out.println("Good have added!");
-    return true;
-}
-
-public boolean deleteGoods(BakeGoods bakeGoods){
-    return BakeGoodsTable.delete(bakeGoods);
+    public boolean addGoods(BakeGoods bakeGoods){
+        if (bakeGoods == null){
+            System.out.println("Error!");
+            return false;
+        }
+        BakeGoodsTable.add(bakeGoods);
+        System.out.println("Good have added!");
+        return true;
     }
 
-public void displayGoods(){
-    BakeGoodsTable.displayHashTable();
-}
+    public boolean deleteGoods(BakeGoods bakeGoods){
+        return BakeGoodsTable.delete(bakeGoods);
+    }
+
+    public void displayGoods(){
+        BakeGoodsTable.displayHashTable();
+    }
     public BakeGoods[] searchByName(String bakeGoodsname) {
         BakeGoods[] goods = new BakeGoods[size];
         int count = 0;
@@ -59,8 +60,8 @@ public void displayGoods(){
 
 
     public BakeGoods[] searchByCountry(String bakeGoodscountry){
-    BakeGoods[] goods = new BakeGoods[size];
-    int count = 0;
+        BakeGoods[] goods = new BakeGoods[size];
+        int count = 0;
         for (int i = 0 ;i < size;i++){
             BakeGoods item = BakeGoodsTable.get(i);
             if (item != null && item.getOriginCountry().equals(bakeGoodscountry)) {
@@ -83,23 +84,31 @@ public void displayGoods(){
         System.arraycopy(goods, 0, sortedGoods, 0, count);
         return sortedGoods;
     }
-public String updateGoods(String Goodsname,BakeGoods newgoods){
-    for (int i = 0 ;i < size;i++){
-        BakeGoods item = BakeGoodsTable.get(i);
-    if (item != null && item.getName().equals(Goodsname)) {
-        item.setOriginCountry(newgoods.getOriginCountry());
-        item.setTextualDES(newgoods.getTextualDES());
-        item.setImgURL(newgoods.getImgURL());
-        return ("update successfully");
+    public String updateGoods(String Goodsname,BakeGoods newgoods){
+        for (int i = 0 ;i < size;i++){
+            BakeGoods item = BakeGoodsTable.get(i);
+            if (item != null && item.getName().equals(Goodsname)) {
+                item.setOriginCountry(newgoods.getOriginCountry());
+                item.setTextualDES(newgoods.getTextualDES());
+                item.setImgURL(newgoods.getImgURL());
+                return ("update successfully");
+            }
+        }
+        return ("fail to update");
     }
+    //Getters and setters are written for persistence services
+    public HashTable<BakeGoods> getBakeGoodsTable() {
+        return BakeGoodsTable;
     }
-    return ("fail to update");
-}
+
+    public void setBakeGoodsTable(HashTable<BakeGoods> bakeGoodsTable) {
+        BakeGoodsTable = bakeGoodsTable;
+    }
 
     public static void main(String[] args) {
         BakeGoodsController case1 = new BakeGoodsController(10);
-        BakeGoods a = new BakeGoods("a","a","a","a");
-        BakeGoods b = new BakeGoods("a","b","b","b");
+        BakeGoods a = new BakeGoods("a");
+        BakeGoods b = new BakeGoods("a");
         case1.addGoods(a);
         case1.addGoods(b);
         case1.searchByName("a");
@@ -112,7 +121,6 @@ public String updateGoods(String Goodsname,BakeGoods newgoods){
 //        case1.displayGoods();
     }
 }
-
 
 
 
