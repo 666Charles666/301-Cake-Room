@@ -2,10 +2,13 @@ package Controller;
 import model.BakeGoods;
 import model.HashTable;
 
+import java.io.Serializable;
+
 /**
  * A class that manages baking items and stores related methods
+ *  Interfaces are there to ensure persistence
  */
-public class BakeGoodsController implements Serializable{
+public class BakeGoodsController implements Serializable {
 
 
     public HashTable<BakeGoods> BakeGoodsTable;

@@ -12,48 +12,51 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <AnchorPane prefHeight="703.0" prefWidth="635.0">
+<Scene xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UIController">
+    <AnchorPane fx:id="displayALLPane" prefHeight="703.0" prefWidth="635.0">
       <children>
-         <Button fx:id="backButton" layoutX="33.0" layoutY="396.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="100.0" text="back">
+         <Button fx:id="BACKButton" layoutX="33.0" layoutY="396.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="100.0" text="BACK">
             <font>
                <Font name="Bauhaus 93" size="13.0" />
             </font>
          </Button>
-         <Button fx:id="saveButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="100.0" text="SAVE">
+         <Button fx:id="SAVEButton" layoutX="33.0" layoutY="477.0" mnemonicParsing="false" onAction="#save" prefHeight="56.0" prefWidth="100.0" text="SAVE">
             <font>
                <Font name="Bauhaus 93" size="13.0" />
             </font>
          </Button>
-         <Button fx:id="loadButton" layoutX="33.0" layoutY="561.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="100.0" text="LOAD">
+         <Button fx:id="LOADButton" layoutX="33.0" layoutY="561.0" mnemonicParsing="false" onAction="#load" prefHeight="56.0" prefWidth="100.0" text="LOAD">
             <font>
                <Font name="Bauhaus 93" size="13.0" />
             </font>
          </Button>
          <Line endX="-100.0" endY="677.0" layoutX="267.0" layoutY="26.0" startX="-100.0" startY="-70.00000762939453" />
-         <TextField fx:id="searchField" layoutX="196.0" layoutY="25.0" promptText="name/country" />
-         <Button layoutX="367.0" layoutY="25.0" mnemonicParsing="false" onAction="#BakeGoodsSearch" text="Search">
-            <font>
-               <Font name="Bauhaus 93" size="13.0" />
-            </font>
-         </Button>
-         <ComboBox layoutX="441.0" layoutY="25.0" prefWidth="150.0" promptText="sort" />
+
          <Line endX="367.0" layoutX="268.0" layoutY="72.0" startX="-100.0" />
-         <ListView layoutX="167.0" layoutY="73.0" prefHeight="631.0" prefWidth="184.0" />
-         <Line endX="-107.00003051757812" endY="606.3333129882812" layoutX="458.0" layoutY="96.0" startX="-107.00003051757812" startY="-23.0" />
+         <ListView layoutX="167.0" layoutY="73.0" prefHeight="631.0" prefWidth="209.0" />
+         <Line endX="-107.00003051757812" endY="606.3333129882812" layoutX="483.0" layoutY="97.0" startX="-107.00003051757812" startY="-23.0" />
          <Label layoutX="181.0" layoutY="93.0" text="BakedGoods" />
-         <ListView layoutX="176.0" layoutY="117.0" prefHeight="93.0" prefWidth="165.0" />
+         <ListView fx:id="viewGoods" layoutX="176.0" layoutY="117.0" prefHeight="93.0" prefWidth="192.0" />
          <Label layoutX="184.0" layoutY="219.0" text="Ingredients" />
-         <ListView layoutX="176.0" layoutY="244.0" prefHeight="97.0" prefWidth="165.0" />
+         <ListView fx:id="viewIngredients" layoutX="176.0" layoutY="254.0" prefHeight="97.0" prefWidth="192.0" />
          <Label layoutX="195.0" layoutY="365.0" text="Recipes" />
-         <ListView layoutX="177.0" layoutY="396.0" prefHeight="195.0" prefWidth="163.0" />
-         <AnchorPane layoutX="351.0" layoutY="73.0" prefHeight="631.0" prefWidth="283.0">
+         <ListView fx:id="viewRecipes" layoutX="177.0" layoutY="407.0" prefHeight="195.0" prefWidth="190.0" />
+         <AnchorPane fx:id="displayPane" layoutX="376.0" layoutY="73.0" prefHeight="631.0" prefWidth="258.0">
             <children>
                <Label layoutX="31.0" layoutY="23.0" text="description" />
-               <TextArea layoutX="31.0" layoutY="51.0" prefHeight="225.0" prefWidth="220.0" />
+               <TextArea fx:id="viewDescription" layoutX="31.0" layoutY="51.0" prefHeight="225.0" prefWidth="220.0" />
                <Label layoutX="48.0" layoutY="301.0" text="image" />
-               <ImageView fitHeight="221.0" fitWidth="220.0" layoutX="31.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="showImage" fitHeight="221.0" fitWidth="220.0" layoutX="31.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true" />
             </children>
          </AnchorPane>
+         <Button fx:id="deleteButton" layoutX="33.0" layoutY="313.0" mnemonicParsing="false" onAction="#delete" prefHeight="56.0" prefWidth="100.0" text="DELETE">
+            <font>
+               <Font name="Bauhaus 93" size="14.0" />
+            </font>
+         </Button>
+         <ComboBox fx:id="typeBox" layoutX="415.0" layoutY="25.0" prefHeight="23.0" prefWidth="77.0" promptText="type" />
+         <TextField fx:id="searchField" layoutX="181.0" layoutY="25.0" />
+         <ComboBox fx:id="sortBox" layoutX="514.0" layoutY="25.0" prefHeight="23.0" prefWidth="100.0" promptText="sort" />
+         <Button fx:id="searchButton" layoutX="349.0" layoutY="25.0" mnemonicParsing="false" onAction="#search" text="search" />
       </children></AnchorPane>
 </Scene>

@@ -2,7 +2,10 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * Recipe class use to store attribute
+ * Interfaces are there to ensure persistence
+ */
 public class Recipes implements Serializable {
     String bakeGoods;
 

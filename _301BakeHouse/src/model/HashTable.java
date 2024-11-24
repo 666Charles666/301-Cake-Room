@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A generic class facilitates the direct use of hash tables
+ * @param <T>
+ */
 public class HashTable<T> implements Serializable {
     private final Object[] hashTable;
 

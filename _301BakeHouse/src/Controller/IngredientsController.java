@@ -217,7 +217,7 @@ public class IngredientsController implements Serializable {
             quickSortByLetter(ingredients, pivotIndex + 1, right);
         }
     }
-    
+
     private int partition(Ingredient[] ingredients, int left, int right) {
         Ingredient pivot = ingredients[right];
         int i = left - 1;
@@ -250,7 +250,9 @@ public class IngredientsController implements Serializable {
         ingredients[j] = temp;
     }
 
-
+/**
+ * The process of testing the feasibility of a method
+ */
 //    public static void main(String[] args) {
 //        IngredientsController ingredientsController = new IngredientsController(50);
 //        ingredientsController.addIngredient("香菜","好吃",12.6);

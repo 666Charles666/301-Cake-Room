@@ -3,6 +3,10 @@ package model;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Ingredient class use to store attribute
+ * Interfaces are there to ensure persistence
+ */
 public class Ingredient implements Serializable {
     private String name,textualDes;
     private String flour,eggs,milk,chocolate,sugar,alcoholicSpirits,fruits,nuts;

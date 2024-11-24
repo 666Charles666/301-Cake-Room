@@ -2,6 +2,10 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * A key/value hash table designed for the recipe class
+ *Re-hashing is used to solve the hash collision problem
+ */
 public class RecipesHash implements Serializable {
     public static class Object implements Serializable{
         public String key;
@@ -49,7 +53,11 @@ public class RecipesHash implements Serializable {
         table[index] = new Object(key, value);
     }
 
-
+    /**
+     * a hash function to get element
+     * @param key
+     * @return
+     */
     public String get(String key) {
         int index = hashFunction1(key);
         int step = hashFunction2(key);
@@ -67,7 +75,10 @@ public class RecipesHash implements Serializable {
         return null;
     }
 
-
+    /**
+     * a hash function to delete element
+     * @param key
+     */
     public void delete(String key) {
         int index = hashFunction1(key);
         int step = hashFunction2(key);
@@ -83,6 +94,10 @@ public class RecipesHash implements Serializable {
         }
     }
 
+    /**
+     * a hash function to display
+     * @return
+     */
     public String display() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < size; i++) {

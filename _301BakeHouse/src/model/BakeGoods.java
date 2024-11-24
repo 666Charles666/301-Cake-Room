@@ -2,6 +2,10 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * BakeGoods class use to store attribute
+ * Interfaces are there to ensure persistence
+ */
 public class BakeGoods implements Serializable {
     private String name,originCountry,textualDES,imgURL,
             cakes,breads,biscuits,tarts,pies;
@@ -9,6 +13,12 @@ public class BakeGoods implements Serializable {
     public BakeGoods(String name){
         this.name = name;
 
+    }
+    public BakeGoods(String name,String originCountry,String textualDES,String imgURL){
+        this.name = name;
+        this.originCountry = originCountry;
+        this.textualDES = textualDES;
+        this.imgURL = imgURL;
     }
 
 
