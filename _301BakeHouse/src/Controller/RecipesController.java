@@ -45,7 +45,7 @@ public class RecipesController implements Serializable {
 ////            System.out.println("please enter the quantity(e.g. 10ml/10g)");
 //
 //        }
-        
+
         recipesHashTable.add(bakeGood,ingredient);
         return "add successfully!";
     }
@@ -57,9 +57,9 @@ public class RecipesController implements Serializable {
         return ("delete successfully");
     }
     public String searchByName(String bakeGood){
-       if ( bakeGood != null ){
-           return "Search result for 'burger': " + recipesHashTable.get(bakeGood);
-       } return "No recipe found for 'burger'.";
+       if ( bakeGood != null && !recipesHashTable.get(bakeGood).equals("null")){
+           return "Search result for " + bakeGood+":"  + recipesHashTable.get(bakeGood);
+       } return "Can't find the recipe named" + bakeGood;
     }
     public String searchByIngredient(String ingredient) {
         String result = "";
