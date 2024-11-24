@@ -127,11 +127,12 @@ public class IngredientsController implements Serializable {
     //Alphabetical sorting can be implemented if the user needs to click a button after searching by calorie
     public String SortByLetter(Ingredient[] ingredients) {
         if (ingredients == null || ingredients.length == 0) {
-            return "No ingredients to sort.";
+            return "Have no ingredients can sort.";
         }
+
         quickSortByLetter(ingredients, 0, ingredients.length - 1);
 
-        String result = "Sorted ingredients by name:\n";
+        String result = "Sort ingredients by it's alphabetical: \n";
         for (Ingredient ingredient : ingredients) {
             result += ingredient.toString() +"\n";
         }
@@ -154,19 +155,19 @@ public class IngredientsController implements Serializable {
         return false;
     }
 
-    private void quickSortByLetter(Ingredient[] ingredients, int low, int high) {
-        if (low < high) {
-            int partitionIndex = partition(ingredients, low, high);
-            quickSortByLetter(ingredients, low, partitionIndex - 1);
-            quickSortByLetter(ingredients, partitionIndex + 1, high);
+    private void quickSortByLetter(Ingredient[] ingredients, int left, int right) {
+        if (left < right) {
+            int pivotIndex = partition(ingredients, left, right);
+            quickSortByLetter(ingredients, left, pivotIndex - 1);
+            quickSortByLetter(ingredients, pivotIndex + 1, right);
         }
     }
 
-    private int partition(Ingredient[] ingredients, int low, int high) {
-        Ingredient pivot = ingredients[high];
-        int i = low - 1;
+    private int partition(Ingredient[] ingredients, int left, int right) {
+        Ingredient pivot = ingredients[right];
+        int i = left - 1;
 
-        for (int j = low; j < high; j++) {
+        for (int j = left; j < right; j++) {
             //JAVA Function
             if (ingredients[j].getName().compareToIgnoreCase(pivot.getName()) <= 0) {
                 i++;
@@ -176,21 +177,25 @@ public class IngredientsController implements Serializable {
                 ingredients[j] = temp;
             }
         }
+        swap(ingredients,i+1,right);
 
-        Ingredient temp = ingredients[i + 1];
-        ingredients[i + 1] = ingredients[high];
-        ingredients[high] = temp;
 
         return i + 1;
     }
+    private void swap(Ingredient[] ingredients,int i, int j){
+        Ingredient temp = ingredients[i];
+        ingredients[i] = ingredients[j];
+        ingredients[j] = temp;
+    }
 
-//    public static void main(String[] args) {
-//        IngredientsController ingredientsController = new IngredientsController(50);
-//        ingredientsController.addIngredient("香菜","好吃",12.6);
-//        System.out.println(ingredientsController.displayIngredient());
-//        ingredientsController.search("香菜");
-//
-//        System.out.println(ingredientsController.displayIngredient());
-//    }
+
+    public static void main(String[] args) {
+        IngredientsController ingredientsController = new IngredientsController(50);
+        ingredientsController.addIngredient("香菜","好吃",12.6);
+        System.out.println(ingredientsController.displayIngredient());
+        ingredientsController.searchByName("香菜");
+
+        System.out.println(ingredientsController.displayIngredient());
+    }
 
 }
