@@ -5,8 +5,14 @@ import model.Ingredient;
 
 import java.io.*;
 
-
+/**
+ *This is a way that stores methods and controls ingredients
+ * Interfaces are there to ensure persistence
+ */
 public class IngredientsController implements Serializable {
+    /**
+     * So the simple linked list here is for the searchByCalorie service, which is easy to print out and ready for sorting
+     */
     class Node implements Serializable{
         Ingredient ingredient;
         Node next;
@@ -15,12 +21,21 @@ public class IngredientsController implements Serializable {
             this.next = null;
         }
     }
-
+    // make public for GUI
     public int size;
 
+    /**
+     * for persistent
+     * @return
+     */
     public HashTable<Ingredient> getIngredientHashTable() {
         return ingredientHashTable;
     }
+
+    /**
+     * for persistent
+     * @param ingredientHashTable
+     */
 
     public void setIngredientHashTable(HashTable<Ingredient> ingredientHashTable) {
         this.ingredientHashTable = ingredientHashTable;
@@ -28,11 +43,22 @@ public class IngredientsController implements Serializable {
 
     public HashTable<Ingredient> ingredientHashTable;
 
+    /**
+     *
+     * @param size
+     */
     public IngredientsController(int size) {
         this.size = size;
         this.ingredientHashTable = new HashTable<>(size);
     }
 
+    /**
+     * add ingredient by this method
+     * @param name
+     * @param textualDes
+     * @param calorie
+     * @return
+     */
     public boolean addIngredient(String name, String textualDes, double calorie) {
 
         if (name == null || textualDes == null || calorie < 0) {
@@ -125,20 +151,18 @@ public class IngredientsController implements Serializable {
     }
 
     //Alphabetical sorting can be implemented if the user needs to click a button after searching by calorie
-    public String SortByLetter(Ingredient[] ingredients) {
+    public Ingredient[] SortByLetter(Ingredient[] ingredients) {
         if (ingredients == null || ingredients.length == 0) {
-            return "Have no ingredients can sort.";
+            System.out.println("Have no ingredients to sort.");
+            return ingredients;  // Return the original array if it's empty or null
         }
 
         quickSortByLetter(ingredients, 0, ingredients.length - 1);
 
-        String result = "Sort ingredients by it's alphabetical: \n";
-        for (Ingredient ingredient : ingredients) {
-            result += ingredient.toString() +"\n";
-        }
-
-        return result;
+        // Return the sorted array of ingredients
+        return ingredients;
     }
+
 
     public boolean update(Ingredient ingredient) {
         Ingredient item = searchByName(ingredient.getName());
@@ -189,13 +213,13 @@ public class IngredientsController implements Serializable {
     }
 
 
-    // public static void main(String[] args) {
-    //     IngredientsController ingredientsController = new IngredientsController(50);
-    //     ingredientsController.addIngredient("香菜","好吃",12.6);
-    //     System.out.println(ingredientsController.displayIngredient());
-    //     ingredientsController.searchByName("香菜");
+    public static void main(String[] args) {
+        IngredientsController ingredientsController = new IngredientsController(50);
+        ingredientsController.addIngredient("香菜","好吃",12.6);
+        System.out.println(ingredientsController.displayIngredient());
+        ingredientsController.searchByName("香菜");
 
-    //     System.out.println(ingredientsController.displayIngredient());
-    // }
+        System.out.println(ingredientsController.displayIngredient());
+    }
 
 }
