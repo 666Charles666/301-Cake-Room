@@ -3,10 +3,10 @@ package model;
 import java.io.Serializable;
 
 public class RecipesHash implements Serializable {
-    private static class Object implements Serializable{
-        String key;
-        String value;
-        boolean isDeleted;
+    public static class Object implements Serializable{
+        public String key;
+        public String value;
+        public boolean isDeleted;
 
         public Object(String key, String value) {
             this.key = key;
@@ -15,8 +15,8 @@ public class RecipesHash implements Serializable {
         }
     }
 
-    private Object[] table;
-    private int size;
+    public Object[] table;
+    public int size;
 
     public RecipesHash(int size) {
         this.size = size;
