@@ -1,133 +1,98 @@
-package Controller;
+package model;
 
-import model.*;
+import java.io.Serializable;
 
-import java.io.*;
-import java.util.Scanner;
+public class RecipesHash implements Serializable {
+    public static class Object implements Serializable{
+        public String key;
+        public String value;
+        public boolean isDeleted;
 
-public class RecipesController implements Serializable {
-    int size ;
-    int totalCalorie = 0;
-
-    public RecipesHash getRecipesHashTable() {
-        return recipesHashTable;
+        public Object(String key, String value) {
+            this.key = key;
+            this.value = value;
+            this.isDeleted = false;
+        }
     }
 
-    public void setRecipesHashTable(RecipesHash recipesHashTable) {
-        this.recipesHashTable = recipesHashTable;
-    }
+    public Object[] table;
+    public int size;
 
-    RecipesHash recipesHashTable;
-    BakeGoodsController bakeGoodsController = new BakeGoodsController(10);
-    public RecipesController(int size){
+    public RecipesHash(int size) {
         this.size = size;
-        this.recipesHashTable = new RecipesHash(size);
+        this.table = new Object[size];
     }
-    public String add(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What good's recipes do you want to add?");
-        String bakeGood = scanner.nextLine();
-        for (int i = 0;i<bakeGoodsController.size;i++){
-            BakeGoods item = bakeGoodsController.BakeGoodsTable.get(i);
-            if (item != null && item.getName().equals(bakeGood)){
-                System.out.println("have found this bake good");
-            }else {
-                bakeGoodsController.addGoods(new BakeGoods(bakeGood));
-                System.out.println("have add a new bake good in class BakeGoods");
+
+    // 主哈希函数
+    private int hashFunction1(String key) {
+        return Math.abs(key.hashCode()) % size;
+    }
+
+
+    private int hashFunction2(String key) {
+        return 1 + (Math.abs(key.hashCode()) % (size - 1));
+    }
+
+
+    public void add(String key, String value) {
+        int index = hashFunction1(key);
+        int step = hashFunction2(key);
+        int i = 0;
+
+
+        while (table[index] != null && !table[index].isDeleted && !table[index].key.equals(key)) {
+            i++;
+            index = (hashFunction1(key) + i * step) % size;
+        }
+
+
+        table[index] = new Object(key, value);
+    }
+
+
+    public String get(String key) {
+        int index = hashFunction1(key);
+        int step = hashFunction2(key);
+        int i = 0;
+
+
+        while (table[index] != null) {
+            if (!table[index].isDeleted && table[index].key.equals(key)) {
+                return table[index].value;
             }
-            break;
+            i++;
+            index = (hashFunction1(key) + i * step) % size;
         }
-//        Recipes recipes = new Recipes(bakeGood);
-        String finalIngredient = "";
-        while (true){
-            System.out.println("What ingredient do you want to add?(or input finish to finish add)");
-            String ingredient = scanner.nextLine();
-            if (ingredient.equals("finish")){
-                System.out.println("ingredient added successfully");
-                break;
+
+        return null;
+    }
+
+
+    public void delete(String key) {
+        int index = hashFunction1(key);
+        int step = hashFunction2(key);
+        int i = 0;
+
+        while (table[index] != null) {
+            if (!table[index].isDeleted && table[index].key.equals(key)) {
+                table[index].isDeleted = true;
+                return;
             }
-            System.out.println("please enter the quantity(e.g. 10ml/10g)");
-            String  quantity = scanner.nextLine();
-             finalIngredient += ingredient + " " + quantity + " ";
+            i++;
+            index = (hashFunction1(key) + i * step) % size;
         }
-        recipesHashTable.add(bakeGood,finalIngredient);
-        return "add successfully!";
     }
-    public String display(){
-        return recipesHashTable.display();
-    }
-    public String delete(String bakeGood){
-        recipesHashTable.delete(bakeGood);
-        return ("delete successfully");
-    }
-    public String searchByName(String bakeGood){
-       if ( bakeGood != null ){
-           return "Search result for 'burger': " + recipesHashTable.get(bakeGood);
-       } return "No recipe found for 'burger'.";
-    }
-    public String searchByIngredient(String ingredient) {
-        String result = "";
-        boolean findIngredient = false;
 
-        for (int i = 0; i < recipesHashTable.size; i++) {
-            RecipesHash.Object recipe = recipesHashTable.table[i];
-            if (recipe != null ) {
-
-                if (recipe.value.contains(ingredient)) {
-                    findIngredient = true;
-                    result += "Recipe Name: " + recipe.key + "\n";
-                    result += "Ingredients: " + recipe.value + "\n";
-                    result += "----------------------------------" + "\n";
-                }
+    public String display() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            if (table[i] != null && !table[i].isDeleted) {
+                stringBuilder.append("Index " + i + ": " + table[i].key + " -> " + table[i].value + "\n");
+            } else {
+                stringBuilder.append("Index " + i + ": null\n");
             }
         }
-
-
-        if (!findIngredient) {
-            return "Sorry,no recipes have found containing this ingredient: " + ingredient + "\n";
-        }
-
-        return result;
+        return stringBuilder.toString();
     }
 
-    public boolean update(String bakeGood) {
-        Scanner scanner = new Scanner(System.in);
-
-        String existingRecipe = recipesHashTable.get(bakeGood);
-        if (existingRecipe == null) {
-            System.out.println("Can't find the recipe of this name");
-            return false;
-        }
-
-        System.out.println("Updating recipe for " + bakeGood);
-        String finalIngredient = "";
-        while (true) {
-            System.out.println("What ingredient do you want to add? (or input 'finish' to finish update)");
-            String ingredient = scanner.nextLine();
-            if (ingredient.equals("finish")) {
-                System.out.println("Ingredients updated successfully.");
-                break;
-            }
-            System.out.println("Please enter the quantity (e.g. 10ml/10g):");
-            String quantity = scanner.nextLine();
-            finalIngredient += ingredient + " " + quantity + " ";
-        }
-
-        recipesHashTable.delete(bakeGood);
-        recipesHashTable.add(bakeGood, finalIngredient);
-        return true;
-    }
-
-
-//    public static void main(String[] args) {
-//        RecipesController recipesController = new RecipesController(50);
-//        recipesController.add();
-//        System.out.println(recipesController.display());
-//        System.out.println(recipesController.searchByName("burger"));
-//        recipesController.update("burger");
-//        System.out.println(recipesController.display());
-//        System.out.println(recipesController.searchByIngredient("香菜"));
-//
-//
-//    }
 }
