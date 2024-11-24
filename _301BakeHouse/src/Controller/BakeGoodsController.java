@@ -5,7 +5,7 @@ import model.HashTable;
 /**
  * A class that manages baking items and stores related methods
  */
-public class BakeGoodsController {
+public class BakeGoodsController implements Serializable{
 
 
     public HashTable<BakeGoods> BakeGoodsTable;
