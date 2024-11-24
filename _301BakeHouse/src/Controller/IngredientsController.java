@@ -7,7 +7,7 @@ import java.io.*;
 
 
 public class IngredientsController implements Serializable {
-    class Node {
+    class Node implements Serializable{
         Ingredient ingredient;
         Node next;
         Node(Ingredient ingredient) {
@@ -123,10 +123,21 @@ public class IngredientsController implements Serializable {
         }
         return result;
     }
-    //按卡路里搜索后如果用户需要点击按钮则可以实现按字母排序
-//    public String SortByLetter(){
-//
-//    }
+
+    //Alphabetical sorting can be implemented if the user needs to click a button after searching by calorie
+    public String SortByLetter(Ingredient[] ingredients) {
+        if (ingredients == null || ingredients.length == 0) {
+            return "No ingredients to sort.";
+        }
+        quickSortByLetter(ingredients, 0, ingredients.length - 1);
+
+        String result = "Sorted ingredients by name:\n";
+        for (Ingredient ingredient : ingredients) {
+            result += ingredient.toString() +"\n";
+        }
+
+        return result;
+    }
 
     public boolean update(Ingredient ingredient) {
         Ingredient item = searchByName(ingredient.getName());
@@ -143,6 +154,35 @@ public class IngredientsController implements Serializable {
         return false;
     }
 
+    private void quickSortByLetter(Ingredient[] ingredients, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(ingredients, low, high);
+            quickSortByLetter(ingredients, low, partitionIndex - 1);
+            quickSortByLetter(ingredients, partitionIndex + 1, high);
+        }
+    }
+
+    private int partition(Ingredient[] ingredients, int low, int high) {
+        Ingredient pivot = ingredients[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            //JAVA Function
+            if (ingredients[j].getName().compareToIgnoreCase(pivot.getName()) <= 0) {
+                i++;
+                // change
+                Ingredient temp = ingredients[i];
+                ingredients[i] = ingredients[j];
+                ingredients[j] = temp;
+            }
+        }
+
+        Ingredient temp = ingredients[i + 1];
+        ingredients[i + 1] = ingredients[high];
+        ingredients[high] = temp;
+
+        return i + 1;
+    }
 
 //    public static void main(String[] args) {
 //        IngredientsController ingredientsController = new IngredientsController(50);
