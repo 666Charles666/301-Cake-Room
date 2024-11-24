@@ -36,12 +36,26 @@ class BakeGoodsControllerTest {
         assertFalse(output2);
     }
     @Test
-    public void searchGoodsTest(){
+    public void searchGoodsByNameTest(){
     bakeGoodsController.addGoods(Cake);
-    BakeGoods output1 = bakeGoodsController.search("cake");
-    BakeGoods output2 = bakeGoodsController.search("big cake");
-    assertEquals("Bake goods name is cake,origin Country is US,textualDES is smooth",output1.toString());
-    assertEquals(null,output2);
+    BakeGoods[] output1 = bakeGoodsController.searchByName("cake");
+    BakeGoods[] output2 = bakeGoodsController.searchByName("big cake");
+        assertNotNull(output1);
+        assertEquals("cake", output1[0].getName());
+        assertEquals("US", output1[0].getOriginCountry());
+        assertEquals("smooth", output1[0].getTextualDES());
+        assertNotNull(output2);
+    }
+    @Test
+    public void searchGoodsByCountryTest() {
+        bakeGoodsController.addGoods(Cake);
+        BakeGoods[] output1 = bakeGoodsController.searchByCountry("US");
+        BakeGoods[] output2 = bakeGoodsController.searchByCountry("big cake");
+        assertNotNull(output1);
+        assertEquals("cake", output1[0].getName());
+        assertEquals("US", output1[0].getOriginCountry());
+        assertEquals("smooth", output1[0].getTextualDES());
+        assertNotNull(output2);
     }
     @Test
     public void updateGoodsTest(){
