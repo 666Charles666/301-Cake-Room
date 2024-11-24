@@ -7,6 +7,14 @@ import java.io.*;
 import java.util.Scanner;
 
 public class IngredientsController implements Serializable {
+    class Node {
+        Ingredient ingredient;
+        Node next;
+        Node(Ingredient ingredient) {
+            this.ingredient = ingredient;
+            this.next = null;
+        }
+    }
 
     public int size;
 
@@ -77,16 +85,9 @@ public class IngredientsController implements Serializable {
         return null;
     }
 
-    public Ingredient[] searchByCalorie(double calorie) {
-        class Node {
-            Ingredient ingredient;
-            Node next;
-            Node(Ingredient ingredient) {
-                this.ingredient = ingredient;
-                this.next = null;
-            }
-        }
 
+
+    public Ingredient[] searchByCalorie(double calorie) {
         Node head = null;
         Node tail = null;
         int count = 0;
@@ -123,7 +124,10 @@ public class IngredientsController implements Serializable {
         }
         return result;
     }
-
+    //按卡路里搜索后如果用户需要点击按钮则可以实现按字母排序
+//    public String SortByLetter(){
+//
+//    }
 
     public boolean update(Ingredient ingredient) {
         Ingredient item = searchByName(ingredient.getName());
