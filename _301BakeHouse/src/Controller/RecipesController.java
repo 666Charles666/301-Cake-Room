@@ -6,7 +6,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class RecipesController implements Serializable {
-    int size;
+    int size ;
+    int totalCalorie = 0;
 
     public RecipesHash getRecipesHashTable() {
         return recipesHashTable;
@@ -59,11 +60,36 @@ public class RecipesController implements Serializable {
         recipesHashTable.delete(bakeGood);
         return ("delete successfully");
     }
-    public String search(String bakeGood){
+    public String searchByName(String bakeGood){
        if ( bakeGood != null ){
            return "Search result for 'burger': " + recipesHashTable.get(bakeGood);
        } return "No recipe found for 'burger'.";
     }
+    public String searchByIngredient(String ingredient) {
+        String result = "";
+        boolean findIngredient = false;
+
+        for (int i = 0; i < recipesHashTable.size; i++) {
+            RecipesHash.Object recipe = recipesHashTable.table[i];
+            if (recipe != null ) {
+
+                if (recipe.value.contains(ingredient)) {
+                    findIngredient = true;
+                    result += "Recipe Name: " + recipe.key + "\n";
+                    result += "Ingredients: " + recipe.value + "\n";
+                    result += "----------------------------------" + "\n";
+                }
+            }
+        }
+
+
+        if (!findIngredient) {
+            return "Sorry,no recipes have found containing this ingredient: " + ingredient + "\n";
+        }
+
+        return result;
+    }
+
     public boolean update(String bakeGood) {
         Scanner scanner = new Scanner(System.in);
 
@@ -93,14 +119,15 @@ public class RecipesController implements Serializable {
     }
 
 
-    public static void main(String[] args) {
-        RecipesController recipesController = new RecipesController(50);
-        recipesController.add();
-        System.out.println(recipesController.display());
-        System.out.println(recipesController.search("burger"));
-        recipesController.update("burger");
-        System.out.println(recipesController.display());
-
-
-    }
+//    public static void main(String[] args) {
+//        RecipesController recipesController = new RecipesController(50);
+//        recipesController.add();
+//        System.out.println(recipesController.display());
+//        System.out.println(recipesController.searchByName("burger"));
+//        recipesController.update("burger");
+//        System.out.println(recipesController.display());
+//        System.out.println(recipesController.searchByIngredient("香菜"));
+//
+//
+//    }
 }
