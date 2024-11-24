@@ -57,7 +57,11 @@ public class RecipesController implements Serializable {
         return ("delete successfully");
     }
     public String searchByName(String bakeGood){
-       if ( bakeGood != null && !recipesHashTable.get(bakeGood).equals("null")){
+        String item = recipesHashTable.get(bakeGood);
+        if (item == null) {
+            return "Can't find the recipe named " + bakeGood;
+        }
+       if (bakeGood != null && !item.equals("null")){
            return "Search result for " + bakeGood+":"  + recipesHashTable.get(bakeGood);
        } return "Can't find the recipe named" + bakeGood;
     }
