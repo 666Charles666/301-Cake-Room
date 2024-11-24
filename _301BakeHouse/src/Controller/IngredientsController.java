@@ -189,13 +189,13 @@ public class IngredientsController implements Serializable {
     }
 
 
-    public static void main(String[] args) {
-        IngredientsController ingredientsController = new IngredientsController(50);
-        ingredientsController.addIngredient("香菜","好吃",12.6);
-        System.out.println(ingredientsController.displayIngredient());
-        ingredientsController.searchByName("香菜");
+    // public static void main(String[] args) {
+    //     IngredientsController ingredientsController = new IngredientsController(50);
+    //     ingredientsController.addIngredient("香菜","好吃",12.6);
+    //     System.out.println(ingredientsController.displayIngredient());
+    //     ingredientsController.searchByName("香菜");
 
-        System.out.println(ingredientsController.displayIngredient());
-    }
+    //     System.out.println(ingredientsController.displayIngredient());
+    // }
 
 }
