@@ -68,7 +68,6 @@ public class IngredientsController implements Serializable {
     public Ingredient searchByName(String ingredientName) {
         for (int i = 0; i < size; i++) {
             Ingredient item = ingredientHashTable.get(i);
-
             if (item != null && item.getName().equals(ingredientName)) {
                 System.out.println("search successfully");
                 System.out.println(item.toString());
@@ -82,8 +81,6 @@ public class IngredientsController implements Serializable {
         class Node {
             Ingredient ingredient;
             Node next;
-
-
             Node(Ingredient ingredient) {
                 this.ingredient = ingredient;
                 this.next = null;
@@ -93,7 +90,6 @@ public class IngredientsController implements Serializable {
         Node head = null;
         Node tail = null;
         int count = 0;
-
         for (int i = 0; i < size; i++) {
             Ingredient item = ingredientHashTable.get(i);
             if (item != null && item.getCalorie() == calorie) {
